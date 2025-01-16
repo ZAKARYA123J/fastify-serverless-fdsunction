@@ -4,11 +4,11 @@ import cors from '@fastify/cors'
 import jwt from '@fastify/jwt'
 import { Server } from 'socket.io'
 import { createServer } from 'http'
-import { authRoutes } from './src/routes/auth.routes.js'
-import { adminRoutes } from './src/routes/admin.routes.js'
-import { notificationRoutes } from './src/routes/notification.routes.js'
-import { createAuthMiddleware } from './src/middleware/auth.middleware.js'
-import { createNotificationMiddleware } from './src/middleware/notification.middleware.js'
+import { authRoutes } from '../src/routes/auth.routes.js'
+import { adminRoutes } from '../src/routes/admin.routes.js'
+import { notificationRoutes } from '../src/routes/notification.routes.js'
+import { createAuthMiddleware } from '../src/middleware/auth.middleware.js'
+import { createNotificationMiddleware } from '../src/middleware/notification.middleware.js'
 
 const fastify = Fastify({ 
   logger: {
