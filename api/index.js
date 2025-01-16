@@ -72,10 +72,14 @@ fastify.decorate('authenticate', createAuthMiddleware(fastify))
 // Register notification middleware
 fastify.addHook('onRequest', createNotificationMiddleware(fastify))
 // Register routes with API versioning prefix
-const apiPrefix = '/api'
-await fastify.register(authRoutes, { prefix: `${apiPrefix}/auth` })
-await fastify.register(adminRoutes, { prefix: `${apiPrefix}/admin` })
-await fastify.register(notificationRoutes, { prefix: `${apiPrefix}/notifications` })
+fastify.get('/api', async (req, reply) => {
+  return reply.status(200).type('text/html').send(html)
+})
+
+fastify.register(authRoutes, { prefix: '/api/auth' })
+fastify.register(adminRoutes, { prefix: '/api/admin' })
+fastify.register(notificationRoutes, { prefix: '/api/notifications' })
+
 // Health check route
 fastify.get('/', async (req, reply) => {
   return reply.status(200).type('text/html').send(html)
