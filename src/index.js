@@ -3,7 +3,6 @@ import Fastify from 'fastify'
 import { PrismaClient } from '@prisma/client'
 import cors from '@fastify/cors'
 import jwt from '@fastify/jwt'
-import { Server } from 'socket.io'
 import { createServer } from 'http'
 import { authRoutes } from './routes/auth.routes.js'
 import { adminRoutes } from './routes/admin.routes.js'
@@ -39,17 +38,8 @@ const fastify = Fastify({
 // Create HTTP server
 const httpServer = createServer(fastify.server)
 
-// Create Socket.IO instance
-const io = new Server(httpServer, {
-  cors: {
-    origin: true,
-    methods: ['GET', 'POST'],
-    credentials: true
-  }
-})
 
-// Make fastify instance available to Socket.IO
-io.fastify = fastify
+
 
 // Make io available to routes
 fastify.decorate('io', io)

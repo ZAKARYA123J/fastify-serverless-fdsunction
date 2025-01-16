@@ -16,8 +16,7 @@
     "@prisma/client": "^5.7.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
-    "fastify": "^4.25.2",
-    "socket.io": "^4.8.1"
+    "fastify": "^4.25.2"
   },
   "devDependencies": {
     "@fastify/swagger": "^8.12.0",
