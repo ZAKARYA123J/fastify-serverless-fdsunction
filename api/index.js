@@ -32,7 +32,7 @@ const fastify = Fastify({
   }
 })
 
-const prisma = new PrismaClient()
+
 
 // Create HTTP server
 const httpServer = createServer(fastify.server)
@@ -84,12 +84,25 @@ fastify.register(notificationRoutes, { prefix: '/api/notifications' })
 fastify.get('/', async (req, reply) => {
   return reply.status(200).type('text/html').send(html)
 })
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL environment variable is required')
+}
 
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required')
+}
 export default async function handler(req, reply) {
   await app.ready()
   app.server.emit('request', req, reply)
 }
-
+const prisma = new PrismaClient({
+  log: ['error'],
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL
+    }
+  }
+})
 const html = `
 <!DOCTYPE html>
 <html lang="en">
