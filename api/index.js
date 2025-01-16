@@ -1,3 +1,4 @@
+"use strict";
 import Fastify from 'fastify'
 import { PrismaClient } from '@prisma/client'
 import cors from '@fastify/cors'
@@ -9,7 +10,8 @@ import { adminRoutes } from '../src/routes/admin.routes.js'
 import { notificationRoutes } from '../src/routes/notification.routes.js'
 import { createAuthMiddleware } from '../src/middleware/auth.middleware.js'
 import { createNotificationMiddleware } from '../src/middleware/notification.middleware.js'
-
+import * as dotenv from "dotenv";
+dotenv.config();
 const fastify = Fastify({ 
   logger: {
     level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
@@ -91,10 +93,7 @@ if (!process.env.DATABASE_URL) {
 if (!process.env.JWT_SECRET) {
   throw new Error('JWT_SECRET environment variable is required')
 }
-export default async function handler(req, reply) {
-  await app.ready()
-  app.server.emit('request', req, reply)
-}
+
 const prisma = new PrismaClient({
   log: ['error'],
   datasources: {
@@ -214,4 +213,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     }
   }
   start()
+}
+export default async (req, res) => {
+  await app.ready();
+  app.server.emit('request', req, res);
 }
