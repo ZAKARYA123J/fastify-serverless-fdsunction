@@ -9,8 +9,6 @@ datasource db {
   provider = "postgresql"
   url      = "postgresql://neondb_owner:LMVuBTI7lj8s@ep-curly-field-a5pimz8f.us-east-2.aws.neon.tech/neondb?sslmode=require"
 }
-
-
 enum Role {
   COCHE
   STAFF
