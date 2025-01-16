@@ -5,9 +5,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nodemon api/index.js",
+    "dev": "nodemon src/index.js",
     "build": "prisma generate",
-    "start": "node api/index.js",
+    "start": "node src/index.js",
     "postinstall": "prisma generate"
   },
   "dependencies": {
